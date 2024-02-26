@@ -28,7 +28,7 @@ const PORT = 3000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/",express.static(path.join(__dirname, 'views')));
-
+app.use(cors())
 // In-memory storage for email and temporary tokens
 const users = new Map();
 
@@ -84,7 +84,7 @@ app.get('/setpassword', (req, res) => {
     
         const email = users.get(token);
         // res.sendFile('index.html');
-        return res.json("hello")
+      
   
 });
 
