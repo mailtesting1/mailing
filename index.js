@@ -20,13 +20,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
-
+const cors = require("cors");
+const path = require('path');
 const app = express();
 const PORT = 3000;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('views'));
+app.use("/",express.static(path.join(__dirname, 'views')));
 
 // In-memory storage for email and temporary tokens
 const users = new Map();
@@ -58,9 +59,9 @@ app.post('/signup', (req, res) => {
     // Send the email with the link
     const mailOptions = {
         from: 'mohamedkhalil.kouroghli@gmail.com',
-        to: "jesserbenkhiria911@gmail.com",
+        to: "mohamedkhalil.kouroghli@gmail.com",
         subject: 'Set Your Password',
-        html: `<p>Click <a href="http://localhost:${PORT}/setpassword/${token}">here</a> to set your password.</p>`
+        html: `<p>Click <a href="http://localhost:3000/setpassword">here</a> to set your password.</p>`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -75,16 +76,16 @@ app.post('/signup', (req, res) => {
 });
 
 // Route for setting password
-app.get('/setpassword/:token', (req, res) => {
+app.get('/setpassword', (req, res) => {
+    console.log("here");
     const token = req.params.token;
 
     // Check if the token exists
-    if (users.has(token)) {
+    
         const email = users.get(token);
-        res.sendFile(__dirname + '/views/set_password.html');
-    } else {
-        res.status(400).send('Invalid token');
-    }
+        // res.sendFile('index.html');
+        return res.json("")
+  
 });
 
 // Route for handling password submission
