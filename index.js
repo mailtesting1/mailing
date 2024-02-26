@@ -83,7 +83,7 @@ app.get('/setpassword', (req, res) => {
     // Check if the token exists
     
         const email = users.get(token);
-        res.sendFile('./index.html');
+        res.sendFile('./views/index.html');
       
   
 });
