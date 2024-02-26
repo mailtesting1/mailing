@@ -61,7 +61,7 @@ app.post('/signup', (req, res) => {
         from: 'mohamedkhalil.kouroghli@gmail.com',
         to: "mohamedkhalil.kouroghli@gmail.com",
         subject: 'Set Your Password',
-        html: `<p>Click <a href="http://localhost:3000/setpassword">here</a> to set your password.</p>`
+        html: `<p>Click <a href="https://mailing-kx53.onrender.com/setpassword">here</a> to set your password.</p>`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -84,7 +84,7 @@ app.get('/setpassword', (req, res) => {
     
         const email = users.get(token);
         // res.sendFile('index.html');
-        return res.json("")
+        return res.json("hello")
   
 });
 
